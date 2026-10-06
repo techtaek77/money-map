@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>월급 계좌 지도</title>
+<meta name="description" content="연금저축·IRP·ISA를 어떤 순서로 열고 무엇을 담는지 보여주는 10분 슬라이드와 월배당 자유 시뮬레이터">
+<meta property="og:title" content="월급 계좌 지도">
+<meta property="og:description" content="연금저축·IRP·ISA 순서와 국내상장 ETF 선수 명단, 월배당 자유 시뮬레이터">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#f6f5f1;--card:#fff;--ink:#191b1a;--sub:#606763;--line:#e2e2dc;--accent:#1f7a5a;--soft:#e2f1ea}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#111312;--card:#1a1d1b;--ink:#ecedeb;--sub:#a2a9a5;--line:#2d312e;--accent:#5cc49a;--soft:#1d3229}}
+:root[data-theme="dark"]{--bg:#111312;--card:#1a1d1b;--ink:#ecedeb;--sub:#a2a9a5;--line:#2d312e;--accent:#5cc49a;--soft:#1d3229}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo",sans-serif;line-height:1.6}
+.wrap{max-width:860px;margin:0 auto;padding:56px 16px 48px}
+h1{font-size:clamp(1.8rem,5vw,2.6rem);letter-spacing:-.03em;margin:0 0 10px;line-height:1.2}
+.lead{color:var(--sub);font-size:1.08rem;margin:0 0 32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+a.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;transition:transform .15s,border-color .15s}
+a.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;color:var(--accent);background:var(--soft);padding:3px 10px;border-radius:999px;margin-bottom:12px}
+.card h2{margin:0 0 8px;font-size:1.3rem;letter-spacing:-.02em}
+.card p{margin:0 0 14px;color:var(--sub);font-size:.95rem}
+.card ul{margin:0 0 14px;padding-left:1.1em;color:var(--sub);font-size:.9rem}
+.go{font-weight:700;color:var(--accent)}
+footer{margin-top:36px;color:var(--sub);font-size:.82rem;border-top:1px solid var(--line);padding-top:16px}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>월급 계좌 지도</h1>
+  <p class="lead">"연금저축이 나아요, ISA가 나아요?" 매번 같은 질문에 답하려고 만든 자료입니다. 상품보다 순서, 수익률보다 계속하기.</p>
+  <div class="grid">
+    <a class="card" href="account-map/">
+      <span class="tag">슬라이드 15장 · 10분</span>
+      <h2>10분 계좌 지도</h2>
+      <p>비상금 → 연금저축 → IRP → ISA → 일반계좌, 어떤 순서로 열고 무엇을 담는지.</p>
+      <ul>
+        <li>네 계좌 한 장 비교표</li>
+        <li>축구 포메이션으로 고르는 수비형·균형형·공격형</li>
+        <li>포지션별 국내상장 ETF 선수 명단 (TIGER·KODEX·ACE·SOL·RISE)</li>
+        <li>실제 연금 리밸런싱 사례, 은퇴기 IRP 4가지 조합</li>
+      </ul>
+      <span class="go">슬라이드 열기 →</span>
+    </a>
+    <a class="card" href="simulator/">
+      <span class="tag">계산기</span>
+      <h2>월배당 자유 시뮬레이터</h2>
+      <p>목표 월배당에서 거꾸로 계산합니다. 세후·물가 반영, 100세까지.</p>
+      <ul>
+        <li>은퇴 나이 슬라이더, 필요한 월 투자액 역산</li>
+        <li>배당소득세 15.4%, 금융소득 종합과세 경고</li>
+        <li>국민연금 전 공백기 부족액</li>
+        <li>입력값을 링크로 공유</li>
+      </ul>
+      <span class="go">시뮬레이터 열기 →</span>
+    </a>
+  </div>
+  <footer>
+    제도·세금 숫자는 2026-07 확인 기준이며 바뀔 수 있습니다. 종목은 매수 추천이 아니라 검색해 볼 이름이고, 시뮬레이션은 투자 조언이 아닙니다.<br>
+    만든 사람: <a href="https://taek2.com" target="_blank" rel="noopener">TAEK2</a> · <a href="https://github.com/techtaek77/money-map">GitHub</a>
+  </footer>
+</div>
+</body>
+</html>
