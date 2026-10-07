@@ -294,7 +294,7 @@ a{color:var(--pen)}
   <div class="body"><div class="wt">
     <div>
       <div class="box ctl">
-        <label>계좌가 이만큼 빠져도 안 판다 <output id="lossOut"></output><input type="range" id="sLoss" min="10" max="45" step="5" value="25"></label>
+        <label>계좌가 이만큼 빠져도 안 판다 <output id="lossOut"></output><input type="range" id="sLoss" min="10" max="35" step="5" value="25"></label>
       </div>
       <div class="alloc" id="wtBar"></div>
       <div class="legend" id="wtLegend"></div>
@@ -610,11 +610,11 @@ function renderWeight(){
   const mix = {sp:eq, cd:bd, b10:bd, b30:bd};
   bar(mix, 'wtBar', 'wtLegend');
   const r = riskyOf(mix);
-  $('wtIrp').innerHTML = `주식 ${Math.round(eq)} : 채권 ${Math.round(100 - eq)} · IRP·DC 위험자산 70% 규칙 ` + (r <= 70 ? '<span class="ok">통과</span>' : `<span class="ng">초과</span> (IRP·DC에선 주식을 70%로 낮추고, 나머지는 연금저축·ISA에서)`);
+  $('wtIrp').innerHTML = `주식 ${Math.round(eq)} : 채권 ${Math.round(100 - eq)} · IRP·DC 위험자산 70% 규칙 ` + (r < 70 ? '<span class="ok">통과</span>' : '<span class="ok">상한</span> (IRP·DC는 위험자산 70%를 넘을 수 없어서 슬라이더도 여기서 멈춘다. 주식을 더 원하면 그 몫은 연금저축·ISA에 둔다)');
   const [a, b] = scen(mix);
   $('wtStress').innerHTML = `<thead><tr><th>그 해에 들고 있었다면</th><th>2008 금융위기</th><th>2022 금리 급등</th></tr></thead><tbody>
     <tr><td>이 비중</td><td>${sgn(a)}</td><td>${sgn(b)}</td></tr>
-    <tr><td>S&amp;P500 100%</td><td>${sgn(SP100[0])}</td><td>${sgn(SP100[1])}</td></tr></tbody>`;
+    <tr><td style="color:var(--sub)">비교: S&amp;P500 100%<br><small>연금저축·ISA만 가능</small></td><td>${sgn(SP100[0])}</td><td>${sgn(SP100[1])}</td></tr></tbody>`;
 }
 $('sLoss').addEventListener('input', renderWeight);
 
@@ -653,8 +653,8 @@ function renderPf(i){
   document.querySelectorAll('#pfBtn button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.i === i));
   const rows = PF.map((q, k) => { const [a, b] = scen(q.mix), r = riskyOf(q.mix);
     return `<tr${k === i ? ' style="background:var(--soft)"' : ''}><td>${q.n}</td><td>${sgn(a)}</td><td>${sgn(b)}</td><td>${r <= 70 ? '<span class="ok">' + r + '%</span>' : '<span class="ng">' + r + '%</span>'}</td></tr>`; }).join('');
-  $('pfTable').innerHTML = `<thead><tr><th>포트폴리오</th><th>2008</th><th>2022</th><th>IRP 위험자산</th></tr></thead><tbody>${rows}
-    <tr><td style="color:var(--sub)">비교: S&amp;P500 100%</td><td>${sgn(SP100[0])}</td><td>${sgn(SP100[1])}</td><td><span class="ng">100%</span></td></tr></tbody>`;
+  $('pfTable').innerHTML = `<thead><tr><th>포트폴리오</th><th>2008</th><th>2022</th><th>IRP·DC 위험자산<br><small>70% 이하만 가능</small></th></tr></thead><tbody>${rows}
+    <tr><td style="color:var(--sub)">비교: S&amp;P500 100%<br><small>IRP·DC에선 못 만든다</small></td><td>${sgn(SP100[0])}</td><td>${sgn(SP100[1])}</td><td><span class="ng">불가</span></td></tr></tbody>`;
 }
 $('pfBtn').addEventListener('click', e => { const b = e.target.closest('button'); if (b) renderPf(+b.dataset.i); });
 
