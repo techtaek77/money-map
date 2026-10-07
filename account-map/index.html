@@ -10,18 +10,19 @@
 :root{
   --bg:#f6f5f1; --paper:#ffffff; --ink:#191b1a; --sub:#606763; --line:#e2e2dc; --soft:#eeede7;
   --cash:#5b7083; --pen:#1f7a5a; --irp:#167a8a; --isa:#c46a1d; --gen:#6b4fa3; --dop:#b8434a;
+  --bond:#2f5fa8; --gold:#a8801a;
   --pen-s:#e2f1ea; --irp-s:#dff0f2; --isa-s:#fbecdc; --gen-s:#ece6f6; --cash-s:#e6ebf0; --dop-s:#f7e1e2;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#111312; --paper:#1a1d1b; --ink:#ecedeb; --sub:#a2a9a5; --line:#2d312e; --soft:#222623;
-    --cash:#93a8bb; --pen:#5cc49a; --irp:#59c0cf; --isa:#f0a35c; --gen:#a98ce0; --dop:#e8828a;
+    --cash:#93a8bb; --pen:#5cc49a; --irp:#59c0cf; --isa:#f0a35c; --gen:#a98ce0; --dop:#e8828a; --bond:#86aaf0; --gold:#e3c063;
     --pen-s:#1d3229; --irp-s:#183034; --isa-s:#3a2a19; --gen-s:#2a2338; --cash-s:#222a31; --dop-s:#3a2224;
   }
 }
 :root[data-theme="dark"]{
   --bg:#111312; --paper:#1a1d1b; --ink:#ecedeb; --sub:#a2a9a5; --line:#2d312e; --soft:#222623;
-  --cash:#93a8bb; --pen:#5cc49a; --irp:#59c0cf; --isa:#f0a35c; --gen:#a98ce0; --dop:#e8828a;
+  --cash:#93a8bb; --pen:#5cc49a; --irp:#59c0cf; --isa:#f0a35c; --gen:#a98ce0; --dop:#e8828a; --bond:#86aaf0; --gold:#e3c063;
   --pen-s:#1d3229; --irp-s:#183034; --isa-s:#3a2a19; --gen-s:#2a2338; --cash-s:#222a31; --dop-s:#3a2224;
 }
 *{box-sizing:border-box}
@@ -105,6 +106,19 @@ td:first-child{font-weight:800;white-space:nowrap}
 .gauge div{height:100%;background:var(--pen);border-radius:999px;transition:width .2s}
 .check li{list-style:none;position:relative;padding-left:1.6em;margin-bottom:6px}
 .check li::before{content:"";position:absolute;left:0;top:.3em;width:1em;height:1em;border:2px solid var(--c,var(--pen));border-radius:4px}
+/* 비중·채권 */
+.wt{display:grid;grid-template-columns:minmax(260px,.85fr) 1.15fr;gap:clamp(14px,2vw,28px);align-items:start}
+.stress{width:100%;font-size:clamp(.8rem,1.1vw,.98rem)}
+.stress td,.stress th{padding:7px 10px}
+.stress td:first-child{font-weight:700}
+.stress .neg{color:var(--dop);font-weight:800}
+.stress .pos{color:var(--pen);font-weight:800}
+.ok{color:var(--pen);font-weight:800}.ng{color:var(--dop);font-weight:800}
+.dur{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.dur div{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px;border-top:4px solid var(--c)}
+.dur b{display:block;font-size:clamp(1.2rem,2.2vw,1.8rem);color:var(--c)}
+.dur span{font-size:clamp(.76rem,1vw,.9rem);color:var(--sub);line-height:1.4}
+@media (max-width:820px){.wt{grid-template-columns:1fr}.dur{grid-template-columns:1fr 1fr}}
 a{color:var(--pen)}
 /* 네비 */
 .nav{position:fixed;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;gap:12px;padding:0 clamp(12px,3vw,32px);background:linear-gradient(transparent,var(--bg) 40%)}
@@ -270,6 +284,73 @@ a{color:var(--pen)}
   <p class="lead">TIGER(미래에셋)·KODEX(삼성)·ACE(한국투자)·SOL(신한)·RISE(KB)는 운용사 이름일 뿐이다. 같은 지수를 따라가면 브랜드가 달라도 같은 선수라서, 여러 개 사도 분산이 안 된다.</p>
   <div class="body"><div class="roster"><div class="rrow" style="--c:var(--cash)"><span class="pos">골키퍼<small>비상금 · 계좌 밖</small></span><div class="chips2"><span class="chip">증권사 CMA</span><span class="chip">파킹통장</span></div></div><div class="rrow" style="--c:var(--irp)"><span class="pos">수비수<small>현금성 · 채권혼합</small></span><div class="chips2"><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>CD금리액티브(합성) <code>459580</code></span><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>CD금리투자KIS(합성) <code>357870</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>머니마켓액티브 <code>488770</code></span><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>미국테크TOP10채권혼합 <code>472170</code></span><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>미국나스닥100채권혼합50 <code>435420</code></span></div></div><div class="rrow" style="--c:var(--pen)"><span class="pos">미드필더<small>S&amp;P500</small></span><div class="chips2"><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>미국S&amp;P500 <code>360750</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>미국S&amp;P500 <code>379800</code></span><span class="chip" style="--bc:var(--dop)"><b>ACE</b>미국S&amp;P500 <code>360200</code></span><span class="chip" style="--bc:var(--pen)"><b>RISE</b>미국S&amp;P500 <code>379780</code></span></div></div><div class="rrow" style="--c:var(--pen)"><span class="pos">미드필더<small>배당다우존스 (SCHD형)</small></span><div class="chips2"><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>미국배당다우존스 <code>458730</code></span><span class="chip" style="--bc:var(--gen)"><b>SOL</b>미국배당다우존스 <code>446720</code></span><span class="chip" style="--bc:var(--dop)"><b>ACE</b>미국배당다우존스 <code>402970</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>미국배당다우존스 <code>489250</code></span></div></div><div class="rrow" style="--c:var(--gen)"><span class="pos">미드필더<small>월배당 커버드콜</small></span><div class="chips2"><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>미국배당다우존스타겟커버드콜2호 <code>458760</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>미국배당커버드콜액티브 <code>441640</code></span></div></div><div class="rrow" style="--c:var(--isa)"><span class="pos">공격수<small>나스닥100</small></span><div class="chips2"><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>미국나스닥100 <code>133690</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>미국나스닥100 <code>379810</code></span><span class="chip" style="--bc:var(--dop)"><b>ACE</b>미국나스닥100 <code>367380</code></span></div></div><div class="rrow" style="--c:var(--dop)"><span class="pos">테마<small>최대 1명 (10%)</small></span><div class="chips2"><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>미국필라델피아반도체나스닥 <code>381180</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>미국반도체 <code>390390</code></span><span class="chip" style="--bc:var(--dop)"><b>ACE</b>미국빅테크TOP7 Plus <code>465580</code></span><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>미국우주테크 <code>0183J0</code></span><span class="chip" style="--bc:var(--cash)"><b>WON</b>미국우주항공방산 <code>440910</code></span></div></div></div>
   <div class="note"><b>고르는 법:</b> 한 줄 안에서는 <b>총보수</b>와 <b>거래량</b>을 보고 하나를 고른다. 보수는 수시로 인하되니 살 때 다시 비교한다. 퇴직연금(DC·IRP)은 사업자마다 살 수 있는 상품이 다르다. 채권혼합형은 주식이 섞여 있어도 안전자산으로 인정돼서 수비수로 쓴다. 숫자는 종목코드이고, 매수 추천이 아니라 검색해 볼 이름이다.</div></div>
+</section>
+
+<!-- 비중 정하기 -->
+<section class="slide">
+  <div class="eyebrow">비중을 숫자로 정하는 법</div>
+  <h2>주식 비중은 '버틸 수 있는 손실'에서 거꾸로 계산한다</h2>
+  <p class="lead">주식은 큰 하락장에서 반 토막이 난다(2008년 S&amp;P500 고점 대비 약 −55%). 그래서 <b>주식 비중 ≈ 버틸 수 있는 계좌 손실 ÷ 50%</b>다. 나머지는 채권·현금이 맡는다.</p>
+  <div class="body"><div class="wt">
+    <div>
+      <div class="box ctl">
+        <label>계좌가 이만큼 빠져도 안 판다 <output id="lossOut"></output><input type="range" id="sLoss" min="10" max="45" step="5" value="25"></label>
+      </div>
+      <div class="alloc" id="wtBar"></div>
+      <div class="legend" id="wtLegend"></div>
+      <p class="cap" id="wtIrp" style="margin-top:8px"></p>
+    </div>
+    <div>
+      <div class="tw"><table class="stress" id="wtStress"></table></div>
+      <div class="cols" style="--n:2;margin-top:12px">
+        <div class="box"><h3>채권 몫은 셋으로 쪼갠다</h3><p>현금성(CD) : 미국채 10년 : 미국채 30년 = 1 : 1 : 1. 2008년처럼 주식이 무너지면 장기채가 받치고, 2022년처럼 금리가 오르면 현금성이 받친다. 한쪽에 몰면 둘 중 한 해에 크게 진다.</p></div>
+        <div class="box"><h3>리밸런싱 규칙 3개</h3><ul><li>1년에 한 번 같은 달에 본다</li><li>목표에서 <b>5%p 넘게</b> 벗어난 것만 고친다</li><li>적립 중이면 팔지 말고 <b>새 납입금</b>으로 모자란 쪽을 산다</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <div class="note"><b>비중은 계좌별이 아니라 합산으로 본다.</b> IRP의 안전자산 30%를 채권으로 채웠다면, 연금저축은 주식을 더 들고 가도 전체 비중은 맞는다. 표의 손익은 미국 대표 ETF(SPY·QQQ·IEF·TLT·GLD) 연간 총수익률(달러 기준)로 계산한 근사치이며 환율은 뺐다.</div></div>
+</section>
+
+<!-- 채권 선수 명단 -->
+<section class="slide">
+  <div class="eyebrow">요즘 많이 사는 채권 ETF · 연금계좌에서 살 수 있는 국내상장</div>
+  <h2>채권이라고 다 수비수가 아니다. 만기가 길면 공격수처럼 흔들린다</h2>
+  <p class="lead">채권 가격은 금리와 반대로 움직이고, 얼마나 크게 움직이는지는 <b>듀레이션(남은 만기와 비슷)</b>이 정한다. 금리가 1%p 오르면 대략 듀레이션만큼 % 빠진다.</p>
+  <div class="body">
+    <div class="dur">
+      <div style="--c:var(--cash)"><b>≈0</b><span>CD금리·머니마켓. 금리가 올라도 거의 안 빠진다</span></div>
+      <div style="--c:var(--irp)"><b>3~5</b><span>국고채 3년·종합채권. 1%p 오르면 3~5% 하락</span></div>
+      <div style="--c:var(--bond)"><b>7~8</b><span>미국채 10년. 1%p 오르면 7~8% 하락</span></div>
+      <div style="--c:var(--dop)"><b>16~20</b><span>국고채·미국채 30년. 1%p에 16~20% 움직인다</span></div>
+    </div>
+    <div class="roster">
+      <div class="rrow" style="--c:var(--cash)"><span class="pos">현금성<small>파킹 · 대기자금</small></span><div class="chips2"><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>CD금리액티브(합성) <code>459580</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>머니마켓액티브 <code>488770</code></span></div></div>
+      <div class="rrow" style="--c:var(--irp)"><span class="pos">국내 단기·종합<small>원화 · 환율 무관</small></span><div class="chips2"><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>국고채3년 <code>114260</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>종합채권(AA-이상)액티브 <code>273130</code></span></div></div>
+      <div class="rrow" style="--c:var(--bond)"><span class="pos">미국채 10년<small>중기 · 균형</small></span><div class="chips2"><span class="chip" style="--bc:var(--isa)"><b>TIGER</b>미국채10년선물 <code>305080</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>미국10년국채액티브(H)</span><span class="chip" style="--bc:var(--dop)"><b>ACE</b>미국10년국채액티브</span></div></div>
+      <div class="rrow" style="--c:var(--dop)"><span class="pos">초장기 30년<small>요즘 가장 많이 산다</small></span><div class="chips2"><span class="chip" style="--bc:var(--dop)"><b>ACE</b>미국30년국채액티브(H) <code>453850</code></span><span class="chip" style="--bc:var(--irp)"><b>KODEX</b>국고채30년액티브 <code>439870</code></span></div></div>
+      <div class="rrow" style="--c:var(--gold)"><span class="pos">금<small>채권의 짝 · 위험자산 분류</small></span><div class="chips2"><span class="chip" style="--bc:var(--dop)"><b>ACE</b>KRX금현물 <code>411060</code></span></div></div>
+    </div>
+    <div class="note"><b>30년물을 살 때:</b> 금리 인하에 거는 베팅이라 수비가 아니라 <b>역방향 공격수</b>다. 2022년 미국 장기채 ETF(TLT)는 −31%로 나스닥과 비슷하게 빠졌다. 이름 끝 <b>(H)</b>는 환헤지라 금리만 남고, (H)가 없으면 달러 환율까지 같이 탄다. 채권 ETF는 IRP·DC에서 안전자산 30% 칸에 들어가지만 금은 위험자산이다. 매수 추천이 아니라 검색해 볼 이름이다.</div>
+  </div>
+</section>
+
+<!-- 채권 포함 포트폴리오 군 -->
+<section class="slide">
+  <div class="eyebrow">채권을 섞은 포트폴리오 6가지 · 국내상장 ETF로 만든다</div>
+  <h2>같은 '채권 포함'이어도 어떤 하락장에서 버티느냐가 다르다</h2>
+  <p class="lead">2008년(경기 침체, 금리 하락)과 2022년(인플레이션, 금리 급등)은 정반대의 위기였다. 하나만 보고 고르면 다른 쪽에서 크게 진다.</p>
+  <div class="body"><div class="wt">
+    <div>
+      <div class="fbtn" id="pfBtn"></div>
+      <div class="alloc" id="pfBar"></div>
+      <div class="legend" id="pfLegend"></div>
+      <div class="box" style="margin-top:12px"><h3 id="pfWho"></h3><p id="pfWhy"></p><p class="cap" id="pfWeak" style="margin-top:8px"></p></div>
+    </div>
+    <div>
+      <div class="tw"><table class="stress" id="pfTable"></table></div>
+      <p class="foot">손익은 미국 대표 ETF 연간 총수익률(달러, 환율 제외) 근사치다. 배당다우(SCHD형)는 2008년 자료가 없어 S&amp;P500 값으로 대신 계산했다. 과거 두 해의 계산이지 미래 수익률이 아니며 투자 권유가 아니다.</p>
+    </div>
+  </div></div>
 </section>
 
 <!-- 9 내 실제 연금 포트 -->
@@ -499,8 +580,87 @@ function renderForm(key){
 let curForm = 'bal';
 document.querySelectorAll('#fbtn button').forEach(b => b.addEventListener('click', () => renderForm(b.dataset.f)));
 
+
+// ── 비중·채권 포트폴리오 (미국 대표 ETF 연간 총수익률 %, 달러 기준 근사) ──
+// sp=SPY, nq=QQQ, dv=SCHD(2008은 SPY 대체), b10=IEF, b30=TLT, cd=현금성, au=GLD
+const AS = {
+  sp:  {k:'S&P500',      c:'--pen',  y08:-36.8, y22:-18.2, risky:true},
+  nq:  {k:'나스닥100',    c:'--isa',  y08:-41.7, y22:-32.6, risky:true},
+  dv:  {k:'배당다우',     c:'--gen',  y08:-36.8, y22:-3.2,  risky:true},
+  cd:  {k:'CD·현금성',    c:'--cash', y08:3,     y22:2,     risky:false},
+  b10: {k:'미국채10년',   c:'--bond', y08:17.9,  y22:-15.2, risky:false},
+  b30: {k:'미국채30년',   c:'--dop',  y08:33.9,  y22:-31.2, risky:false},
+  au:  {k:'금',          c:'--gold', y08:4.9,   y22:-0.8,  risky:true},
+};
+const pct = v => (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+const sgn = v => `<span class="${v >= 0 ? 'pos' : 'neg'}">${pct(v)}</span>`;
+function scen(mix){ let a = 0, b = 0; for (const k in mix){ a += mix[k] * AS[k].y08 / 100; b += mix[k] * AS[k].y22 / 100; } return [a, b]; }
+function riskyOf(mix){ let r = 0; for (const k in mix) if (AS[k].risky) r += mix[k]; return r; }
+function bar(mix, barId, legId){
+  const css = getComputedStyle(document.documentElement);
+  const ks = Object.keys(mix).filter(k => mix[k] > 0);
+  $(barId).innerHTML = ks.map(k => `<div style="flex:${mix[k]};background:${css.getPropertyValue(AS[k].c)}">${mix[k] >= 20 ? AS[k].k + ' ' + Math.round(mix[k]) : ''}</div>`).join('');
+  $(legId).innerHTML = ks.map(k => `<span><i style="background:${css.getPropertyValue(AS[k].c)}"></i>${AS[k].k} ${Math.round(mix[k])}%</span>`).join('');
+}
+const SP100 = scen({sp:100});
+
+function renderWeight(){
+  const loss = +$('sLoss').value; $('lossOut').textContent = '−' + loss + '%';
+  const eq = Math.min(100, loss / 50 * 100), bd = (100 - eq) / 3;
+  const mix = {sp:eq, cd:bd, b10:bd, b30:bd};
+  bar(mix, 'wtBar', 'wtLegend');
+  const r = riskyOf(mix);
+  $('wtIrp').innerHTML = `주식 ${Math.round(eq)} : 채권 ${Math.round(100 - eq)} · IRP·DC 위험자산 70% 규칙 ` + (r <= 70 ? '<span class="ok">통과</span>' : `<span class="ng">초과</span> (IRP·DC에선 주식을 70%로 낮추고, 나머지는 연금저축·ISA에서)`);
+  const [a, b] = scen(mix);
+  $('wtStress').innerHTML = `<thead><tr><th>그 해에 들고 있었다면</th><th>2008 금융위기</th><th>2022 금리 급등</th></tr></thead><tbody>
+    <tr><td>이 비중</td><td>${sgn(a)}</td><td>${sgn(b)}</td></tr>
+    <tr><td>S&amp;P500 100%</td><td>${sgn(SP100[0])}</td><td>${sgn(SP100[1])}</td></tr></tbody>`;
+}
+$('sLoss').addEventListener('input', renderWeight);
+
+const PF = [
+  {id:'6040', n:'60/40 클래식', mix:{sp:60, b10:40},
+   who:'이런 사람: 하나만 기억하고 싶다 · 10년 넘게 둘 돈',
+   why:'주식 60, 중기 국채 40. 수십 년 동안 연기금의 기본값이었다. 1년에 한 번 60:40으로 되돌리는 게 전부다.',
+   weak:'약점: 2022년처럼 금리가 오르면 주식과 채권이 같이 빠진다. 그해에는 채권이 방패가 아니었다.'},
+  {id:'perm', n:'영구 포트폴리오', mix:{sp:25, b30:25, au:25, cd:25},
+   who:'이런 사람: 다음 위기가 뭔지 모르겠다 · 크게 잃는 게 제일 싫다',
+   why:'주식·장기채·금·현금 25%씩. 호황엔 주식, 침체엔 장기채, 인플레이션엔 금, 긴축엔 현금이 맡는다.',
+   weak:'약점: 강세장에서 주식 100%보다 한참 뒤처진다. 금이 25%라 IRP에선 위험자산 50%로 계산된다.'},
+  {id:'aw', n:'올웨더 단순형', mix:{sp:30, b30:40, b10:15, au:15},
+   who:'이런 사람: 변동성을 줄이고 싶지만 현금은 싫다',
+   why:'레이 달리오식 올웨더를 국내상장 ETF 4개로 줄였다(원자재 몫은 금으로 합침). 주식보다 채권 위험이 더 크다.',
+   weak:'약점: 장기채가 55%라 금리가 오르는 해에 오히려 주식형보다 더 빠질 수 있다(2022년).'},
+  {id:'irp', n:'IRP 70/30 꽉 채움', mix:{sp:40, nq:30, cd:15, b30:15},
+   who:'이런 사람: IRP·DC를 공격적으로 굴리고 싶다',
+   why:'위험자산 한도 70%를 다 쓰고, 안전 30%를 현금성과 장기채로 반씩 나눴다. 금리가 오르든 내리든 30% 중 절반은 버틴다.',
+   weak:'약점: 하락장 손실은 주식형에 가깝다. 70%가 주식이라는 걸 잊지 않는다.'},
+  {id:'inc', n:'인컴 채권형', mix:{dv:40, b10:30, cd:30},
+   who:'이런 사람: 은퇴 후 매달 꺼내 쓴다',
+   why:'배당다우 40에 월분배 미국채 10년과 현금성을 섞었다. 1~2년 생활비는 현금성 칸에서 꺼내 써서 하락장에 주식을 팔지 않는다.',
+   weak:'약점: 성장 몫이 작다. 물가가 오래 오르면 실질 구매력이 줄 수 있다.'},
+  {id:'grow', n:'성장 + 장기채 보험', mix:{nq:50, sp:20, b30:30},
+   who:'이런 사람: 공격형인데 폭락장 보험 하나는 들고 싶다',
+   why:'주식 70에 장기채 30. 경기 침체로 주식이 무너질 땐 금리가 내려 장기채가 크게 오른다(2008년 +34%).',
+   weak:'약점: 2022년처럼 인플레이션 하락장에선 보험까지 같이 빠진다. 이 조합의 최악은 그런 해다.'},
+];
+let curPf = 0;
+$('pfBtn').innerHTML = PF.map((p, i) => `<button data-i="${i}">${p.n}</button>`).join('');
+function renderPf(i){
+  curPf = i; const p = PF[i];
+  bar(p.mix, 'pfBar', 'pfLegend');
+  $('pfWho').textContent = p.who; $('pfWhy').textContent = p.why; $('pfWeak').textContent = p.weak;
+  document.querySelectorAll('#pfBtn button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.i === i));
+  const rows = PF.map((q, k) => { const [a, b] = scen(q.mix), r = riskyOf(q.mix);
+    return `<tr${k === i ? ' style="background:var(--soft)"' : ''}><td>${q.n}</td><td>${sgn(a)}</td><td>${sgn(b)}</td><td>${r <= 70 ? '<span class="ok">' + r + '%</span>' : '<span class="ng">' + r + '%</span>'}</td></tr>`; }).join('');
+  $('pfTable').innerHTML = `<thead><tr><th>포트폴리오</th><th>2008</th><th>2022</th><th>IRP 위험자산</th></tr></thead><tbody>${rows}
+    <tr><td style="color:var(--sub)">비교: S&amp;P500 100%</td><td>${sgn(SP100[0])}</td><td>${sgn(SP100[1])}</td><td><span class="ng">100%</span></td></tr></tbody>`;
+}
+$('pfBtn').addEventListener('click', e => { const b = e.target.closest('button'); if (b) renderPf(+b.dataset.i); });
+
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', renderAlloc);
-renderAlloc(); renderSim(); renderForm('bal');
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { renderWeight(); renderPf(curPf); });
+renderAlloc(); renderSim(); renderForm('bal'); renderWeight(); renderPf(0);
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => renderForm(curForm));
 go((parseInt(location.hash.slice(1)) || 1) - 1);
 </script>
